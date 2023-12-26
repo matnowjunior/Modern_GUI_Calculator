@@ -19,13 +19,13 @@ class ToggleButton:
         self.image3 = self.load_image(image3, size)
         self.button = tk.Canvas(master, width=size[0], height=size[1], bg='#261717', bd=0, highlightthickness=0)
         self.image_on_canvas = self.button.create_image(0, 0, anchor=tk.NW, image=self.image1)
-        self.button.create_text(size[0]//2, size[1]//2, text=text, fill="#EBE9E9", font=("Segoe UI", 20))
         self.button.grid(row=row, column=column, padx=padx, pady=pady)
         self.button.bind('<Button-1>', self.on_click)  
         self.button.bind('<ButtonRelease-1>', self.on_release)
         self.button.bind('<Enter>', self.on_enter)
-        self.button.bind('<Leave>', self.on_leave)
-
+        self.button.bind('<Leave>', self.on_leave)       
+        self.button.create_text(size[0]//2, size[1]//2, text=text, fill="#EBE9E9", font=("Segoe UI", 20))
+        
     def button_click(self, number=0):
         current = e.get()
         e.delete(0, END)
@@ -35,8 +35,6 @@ class ToggleButton:
         if path not in loaded_images:
             loaded_images[path] = ImageTk.PhotoImage(Image.open(path).resize(size, Image.Resampling.LANCZOS))
         return loaded_images[path]
-
-    
 
     def on_click(self,event):
         global f_num
@@ -94,6 +92,8 @@ class ToggleButton:
             e.delete(0, END)
         elif self.chosenButton == 16 and "." not in e.get():
             current = e.get()
+            if current == "":
+                current = "0"
             e.delete(0, END)
             e.insert(0, str(current)+str("."))
         elif self.chosenButton == 17:
