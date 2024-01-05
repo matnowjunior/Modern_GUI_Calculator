@@ -44,6 +44,7 @@ class ToggleButton:
             e.delete(0, END)
             self.button.itemconfig(self.image_on_canvas, image=self.image2)
         elif self.chosenButton == 11:
+            self.button.itemconfig(self.image_on_canvas, image=self.image2)
             value = 0
             if math == "root":
                 e.delete(0, END)
@@ -68,28 +69,37 @@ class ToggleButton:
                     value = f_num * second_number
                 elif math == "divide":
                     value = f_num / second_number
-                
+
                 if value.is_integer():
                     e.insert(0, int(value))
                 else:
                     e.insert(0, value)
             
         elif self.chosenButton == 12:
-            math="add"
-            f_num = float(e.get())
-            e.delete(0, END)
+            self.button.itemconfig(self.image_on_canvas, image=self.image2)
+            if(e.get() != ""):
+                math="add"
+                f_num = float(e.get())
+                e.delete(0, END)
         elif self.chosenButton == 13:
-            math="subtract"
-            f_num = float(e.get())
-            e.delete(0, END)
+            self.button.itemconfig(self.image_on_canvas, image=self.image2)
+            if(e.get() != ""):
+                math="subtract"
+                f_num = float(e.get())
+                e.delete(0, END)
         elif self.chosenButton == 14:
-            math="multiply"
-            f_num = float(e.get())
-            e.delete(0, END)
+
+            self.button.itemconfig(self.image_on_canvas, image=self.image2)
+            if(e.get() != ""):
+                math="multiply"
+                f_num = float(e.get())
+                e.delete(0, END)
         elif self.chosenButton == 15 :
-            math="divide"
-            f_num = float(e.get())
-            e.delete(0, END)
+            self.button.itemconfig(self.image_on_canvas, image=self.image2)
+            if(e.get() != ""):
+                math="divide"
+                f_num = float(e.get())
+                e.delete(0, END)
         elif self.chosenButton == 16 and "." not in e.get():
             current = e.get()
             if current == "":
@@ -97,6 +107,7 @@ class ToggleButton:
             e.delete(0, END)
             e.insert(0, str(current)+str("."))
         elif self.chosenButton == 17:
+            self.button.itemconfig(self.image_on_canvas, image=self.image2)
             if "-" in e.get():
                 current = e.get()
                 e.delete(0, END)
@@ -107,12 +118,15 @@ class ToggleButton:
                 e.insert(0, str("-")+str(current))
         elif self.chosenButton == 18:
             current = e.get()
-            e.delete(0, END)
+            e.delete(0, END)    
             e.insert(0, str(current)[:-1])
+            self.button.itemconfig(self.image_on_canvas, image=self.image2)
         elif self.chosenButton == 19:
-            math="root"
-            f_num = float(e.get())
-            e.delete(0, END)
+            self.button.itemconfig(self.image_on_canvas, image=self.image2)
+            if(e.get() != ""):
+                math="root"
+                f_num = float(e.get())
+                e.delete(0, END)
         else:
             if self.chosenButton is not 16:
                 self.button_click(self.chosenButton)
@@ -120,7 +134,7 @@ class ToggleButton:
                 
 
     def on_release(self, event):
-        self.button.itemconfig(self.image_on_canvas, image=self.image1)
+        self.button.itemconfig(self.image_on_canvas, image=self.image3)
 
     def on_enter(self, event):
         self.button.itemconfig(self.image_on_canvas, image=self.image3)
@@ -140,6 +154,8 @@ root.geometry('305x450')
 root.resizable(False, False)
 root.iconbitmap('D:/Python/tkinter/Images/icon.ico')
 
+
+
 #Changing title bar color
 HWND = windll.user32.GetParent(root.winfo_id())
 title_bar_color = 0x1A1B2B
@@ -150,6 +166,7 @@ large_font = font.Font(family='Segoe UI', size=25)
 global e 
 e = tk.Entry(root, width=15, bg="#2B1B1A", fg="#EBE9E9", borderwidth=0, font=large_font, insertontime=0)
 e.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
+
 
 # Ustawienia dla przycisków
 button_size = (70, 70)
